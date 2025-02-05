@@ -32,10 +32,10 @@ export async function POST(request: Request) {
       throw new Error(error.message)
     }
 
-    const custom = new OpenAI({
-      apiKey: customModel.api_key || "",
-      baseURL: customModel.base_url
-    })
+const custom = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || "",  // Use OpenAI API key from Vercel
+  baseURL: "https://api.openai.com/v1"       // Correct OpenAI endpoint
+})
 
     const response = await custom.chat.completions.create({
       model: chatSettings.model as ChatCompletionCreateParamsBase["model"],
